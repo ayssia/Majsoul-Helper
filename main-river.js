@@ -1133,7 +1133,8 @@
             };
             const tiles = tenhou.MPSZ.expand(tilesIn);
             const c = tenhou.MPSZ.exextract34(tiles);
-            const syanten_org = tenhou.SYANTEN.calcSyanten2(c, 34)[0];
+            const syanten_org = view.DesktopMgr.Inst.auto_nofulu ? tenhou.SYANTEN.calcSyanten2(c, 34)[0]
+                                                                 : tenhou.SYANTEN.calcSyanten2(c, 34)[1];
             const options = new Array(35);
             const nextjzoptions = new Array(35);
             const nextgloptions = new Array(35);
@@ -1174,7 +1175,9 @@
                         if (i == j || c[j] >= 4)
                             continue;
                         c[j]++; // 摸
-                        if (tenhou.SYANTEN.calcSyanten2(c, 34)[0] == syanten_org - 1) {
+                        var syanten_new = view.DesktopMgr.Inst.auto_nofulu ? tenhou.SYANTEN.calcSyanten2(c, 34)[0]
+                                                                           : tenhou.SYANTEN.calcSyanten2(c, 34)[1];
+                        if (syanten_new == syanten_org - 1) {
                             options[i].push(j);
                             for (let k = 0; k < 34; ++k) {
                                 if (!c[k])
@@ -1186,7 +1189,9 @@
                                     if (k == l || c[l] >= 4)
                                         continue;
                                     c[l]++; // 摸
-                                    if (tenhou.SYANTEN.calcSyanten2(c, 34)[0] == syanten_org - 2) {
+                                    var syanten_new_next = view.DesktopMgr.Inst.auto_nofulu ? tenhou.SYANTEN.calcSyanten2(c, 34)[0]
+                                                                                       : tenhou.SYANTEN.calcSyanten2(c, 34)[1];
+                                    if (syanten_new_next == syanten_org - 2) {
                                         nextjzoptions[k].push(l);
                                     }
                                     else {
